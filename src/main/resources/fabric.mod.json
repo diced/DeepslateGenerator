@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "id": "deepslategenerator",
+  "version": "${version}",
+  "name": "DeepslateGenerator",
+  "description": "Generate deepslate when a cobblestone generator is made under y = 0",
+  "authors": [
+    "dicedtomato"
+  ],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/deepslategenerator/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "me.diced.deepslategenerator.DeepslateGenerator"
+    ]
+  },
+  "mixins": [
+    "deepslategenerator.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.12.8",
+    "fabric": "*"
+  }
+}
