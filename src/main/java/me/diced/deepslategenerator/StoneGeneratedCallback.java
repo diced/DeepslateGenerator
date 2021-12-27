@@ -7,10 +7,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 // https://fabricmc.net/wiki/tutorial:events
-public interface CobblestoneGeneratedCallback {
-    Event<CobblestoneGeneratedCallback> EVENT = EventFactory.createArrayBacked(CobblestoneGeneratedCallback.class,
+public interface StoneGeneratedCallback {
+    Event<StoneGeneratedCallback> EVENT = EventFactory.createArrayBacked(StoneGeneratedCallback.class,
             (listeners) -> (world, pos) -> {
-                for (CobblestoneGeneratedCallback listener : listeners) {
+                for (StoneGeneratedCallback listener : listeners) {
                     ActionResult result = listener.interact(world, pos);
 
                     if(result != ActionResult.PASS) {

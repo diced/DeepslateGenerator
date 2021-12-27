@@ -1,6 +1,6 @@
 package me.diced.deepslategenerator.mixin;
 
-import me.diced.deepslategenerator.CobblestoneGeneratedCallback;
+import me.diced.deepslategenerator.StoneGeneratedCallback;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FluidBlock;
 import net.minecraft.util.ActionResult;
@@ -13,9 +13,16 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(FluidBlock.class)
 public abstract class FluidBlockMixin {
-    @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/block/FluidBlock;playExtinguishSound(Lnet/minecraft/world/WorldAccess;Lnet/minecraft/util/math/BlockPos;)V"), method = "receiveNeighborFluids", cancellable = true)
-    private void onGenerate(World world, BlockPos pos, BlockState state, CallbackInfoReturnable<Boolean> cir) {
-        ActionResult result = CobblestoneGeneratedCallback.EVENT.invoker().interact(world, pos);
+    @Inject(
+            method = "receiveNeighborFluids",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/block/FluidBlock;playExtinguishSound(Lnet/minecraft/world/WorldAccess;Lnet/minecraft/util/math/BlockPos;)V"
+            ),
+            cancellable = true
+    )
+    private void deepslateGenerator$onGenerate(World world, BlockPos pos, BlockState state, CallbackInfoReturnable<Boolean> cir) {
+        ActionResult result = StoneGeneratedCallback.EVENT.invoker().interact(world, pos);
 
         if(result == ActionResult.FAIL) {
             cir.cancel();
